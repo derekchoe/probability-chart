@@ -1,22 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+
+import Chart from './components/chart'
+import Dropdown from './components/dropdown'
+
+const dropdownArray = [
+  { display: 'Moneyline', value: 'home_win_pct' },
+  { display: 'Total', value: 'over_win_pct' },
+  { display: 'Spread', value: 'home_spread_win_pct' },
+]
 
 function App() {
+  const [filter, handleFilter] = useState(dropdownArray[0]);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Chart type={filter}/>
+        <p>Prop Type:</p>
+        <Dropdown items={dropdownArray} selected={filter} handleClick={val => handleFilter(val)} />
       </header>
     </div>
   );
